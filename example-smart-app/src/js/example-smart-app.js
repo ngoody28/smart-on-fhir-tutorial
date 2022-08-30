@@ -64,8 +64,23 @@
 
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
-          p.temp = getQuantityValueAndUnit(temp[0]);
+          p.temp = getQuantityValueAndUnit(temp[0]);         
           
+          p.allergyIntolerance = '<table>';
+          algy.foreach (function(ai) {
+            p.allergyIntolerance += '<tr><td>' + ai.code.text + '</td><td>'
+            if(typeof ai.reaction != 'undefined') {
+              ai.reaction.forEach(function(ri) {
+                ri.manifestation.forEach(function(mi) {
+                  p.allergyIntolerance += mi.text + ' (' + ri.severity + ')<br />';
+                });
+              });
+            } else {
+              p.allergyIntolerance += '&nbsp;';
+            }
+            p.allergyIntolerance += '</td></tr>';            
+          });
+          p.allergyIntolerance += '</table>';
           console.log(algy);
 
           ret.resolve(p);
@@ -92,6 +107,7 @@
       ldl: {value: ''},
       hdl: {value: ''},
       temp: {value: ''},
+      allergyIntolerance: {value: ''}
     };
   }
 
@@ -136,6 +152,7 @@
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
     $('#temp').html(p.temp);
+    $('#allergyIntolerance').html(p.allergyIntolerance);
   };
 
 })(window);
