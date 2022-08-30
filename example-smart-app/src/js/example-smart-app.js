@@ -67,7 +67,7 @@
           p.temp = getQuantityValueAndUnit(temp[0]);         
           
           p.allergyIntolerance = '<table>';
-          algy.foreach (function(ai) {
+          algy.forEach(function(ai) {
             p.allergyIntolerance += '<tr><td>' + ai.code.text + '</td><td>'
             if(typeof ai.reaction != 'undefined') {
               ai.reaction.forEach(function(ri) {
