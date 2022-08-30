@@ -66,7 +66,7 @@
           p.ldl = getQuantityValueAndUnit(ldl[0]);
           p.temp = getQuantityValueAndUnit(temp[0]);
           
-          console.log(algy)
+          console.log(algy);
 
           ret.resolve(p);
         });
